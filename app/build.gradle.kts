@@ -67,8 +67,17 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation ("androidx.compose.ui:ui:1.x.x")
+    //Arayüz İçin
+    implementation("androidx.compose.ui:ui-text-android:1.6.7")
+    implementation("androidx.compose.foundation:foundation-android:1.6.7")
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+
     implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.x.x")
-    implementation ("androidx.navigation:navigation-compose:2.x.x")
+
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    //Sayfalar arası veri transferi(Nesne Tabanlı)
+    implementation("com.google.code.gson:gson:2.10.1")
 
 }
