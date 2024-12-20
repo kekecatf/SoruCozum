@@ -1,30 +1,25 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHost
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.ui.theme.MyApplicationTheme
+import com.example.myapplication.AnaSayfaDenemeler.MainScreenWithStats
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            QuizApp()
+            //com.example.myapplication.AnaSayfaDenemeler.MainScreen()
+            SayfaGecisleri()
         }
     }
 }
@@ -32,28 +27,21 @@ class MainActivity : ComponentActivity() {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun QuizApp() {
+fun SayfaGecisleri() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "main") {
-        composable("main") {
-            MainScreen(
-                navController = navController,
-                onStartQuiz = { navController.navigate("quiz") })
+    NavHost(navController = navController, startDestination = "AnaSayfa") {
+        composable("AnaSayfa") {
+            MainScreenWithStats(navController = navController)
         }
-        composable("quiz") {
-            QuizScreen(
-                questions = sampleQuestions,
-                onQuizFinish = { score ->
-                navController.navigate("result/$score")
-            })
-        }
-        composable("result/{score}") { backStackEntry ->
-            val score = backStackEntry.arguments?.getString("score")?.toInt() ?: 0
-            ResultScreen(
-                score = score,
-                totalQuestions = sampleQuestions.size) {
-                navController.popBackStack("main", inclusive = false)
-            }
+        composable("Ayarlar"){
+            ayarlar()
         }
     }
+}
+
+@SuppressLint("NewApi")
+@Preview
+@Composable
+fun preview2(){
+    SayfaGecisleri()
 }

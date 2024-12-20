@@ -1,6 +1,5 @@
 package com.example.myapplication.AnaSayfaDenemeler
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -10,20 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.example.myapplication.SayfaGecisleri
 
-
+/*
 @Composable
-fun MainScreenWithStats(navController: NavController) {
+fun MainScreenWithStats() {
     Scaffold(
-        topBar = { AppTopBarWithWelcome("Ahmet") },
+        topBar = { AppTopBarWithWelcome(userName = "Ahmet") },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
@@ -33,7 +27,7 @@ fun MainScreenWithStats(navController: NavController) {
             ) {
                 UserStatsSection()
                 Spacer(modifier = Modifier.height(16.dp))
-                QuickTestOptions(navController)
+                QuickTestOptions()
             }
         },
         bottomBar = { BottomNavigationBar4() }
@@ -46,8 +40,7 @@ fun AppTopBarWithWelcome(userName: String) {
     TopAppBar(
         title = {
             Text(
-                text = "MEB-AGS \nSoruları Çöz",
-                fontStyle = FontStyle.Italic,
+                text = "KPSS Çalışma",
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )
@@ -55,9 +48,9 @@ fun AppTopBarWithWelcome(userName: String) {
         actions = {
             Text(
                 text = "Hoş geldin, $userName!",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                color = Color(0xFFFFB74D)
+                fontSize = 14.sp,
+                color = Color.White,
+                modifier = Modifier.padding(end = 16.dp)
             )
         }
     )
@@ -111,7 +104,7 @@ fun StatBox(label: String, value: String) {
 }
 
 @Composable
-fun QuickTestOptions(navController: NavController) {
+fun QuickTestOptions() {
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -122,16 +115,16 @@ fun QuickTestOptions(navController: NavController) {
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
         )
-        TestButton2(navController,"Türkçe Testi", Icons.Default.Create, Color(0xFF81C784))
-        TestButton2(navController,"Matematik Testi", Icons.Default.Create, Color(0xFF64B5F6))
-        TestButton2(navController,"Tarih Testi", Icons.Default.Create, Color(0xFFFFB74D))
+        TestButton2("Türkçe Testi", Icons.Default.Create, Color(0xFF81C784))
+        TestButton2("Matematik Testi", Icons.Default.Create, Color(0xFF64B5F6))
+        TestButton2("Tarih Testi", Icons.Default.Create, Color(0xFFFFB74D))
     }
 }
 
 @Composable
-fun TestButton2(navController: NavController,title: String, icon: ImageVector, color: Color) {
+fun TestButton2(title: String, icon: androidx.compose.ui.graphics.vector.ImageVector, color: Color) {
     Button(
-        onClick = { navController.navigate("Ayarlar")},
+        onClick = { /* Test seçimine yönlendirme */ },
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp),
@@ -169,10 +162,4 @@ fun BottomNavigationBar4() {
         )
     }
 }
-
-@SuppressLint("NewApi")
-@Preview
-@Composable
-fun preview2(){
-    SayfaGecisleri()
-}
+*/
