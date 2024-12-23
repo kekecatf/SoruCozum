@@ -1,5 +1,7 @@
 package com.example.myapplication.testSayfalar
 
+import android.graphics.Color.rgb
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -76,10 +78,10 @@ fun QuestionComponent(
     questionText: String,
     options: List<String>,
     correctAnswer: String,
-    onAnswerSelected: (Boolean) -> Unit // Doğru/yanlış sonucu dışarıya iletmek için lambda
+    onAnswerSelected: (Boolean) -> Unit
 ) {
     var selectedAnswer by remember { mutableStateOf<String?>(null) }
-    var resultMessage by remember { mutableStateOf("") }
+    var isCorrect by remember { mutableStateOf<Boolean?>(null) }
 
     Column(
         modifier = Modifier
@@ -95,34 +97,28 @@ fun QuestionComponent(
 
         // Şıklar
         options.forEach { option ->
-            val isSelected = selectedAnswer == option.substring(0, 1)
+            val optionKey = option.substring(0, 1) // Şıkların anahtar harfi
+            val backgroundColor = when {
+                selectedAnswer == null -> Color(rgb(46, 80, 119)) // Henüz seçim yapılmadıysa
+                optionKey == selectedAnswer && isCorrect == true -> Color.Green // Doğru cevap
+                optionKey == selectedAnswer && isCorrect == false -> Color.Red // Yanlış cevap
+                else -> Color(rgb(46, 80, 119)) // Seçilmeyen şıklar
+            }
+
             Text(
                 text = option,
                 style = MaterialTheme.typography.bodyMedium,
-                color = if (isSelected) Color.Blue else Color.Black,
+                color = Color.White, // Şık yazı rengi
                 modifier = Modifier
                     .fillMaxWidth()
+                    .background(backgroundColor) // Arkaplan rengini dinamik ayarla
                     .clickable(enabled = selectedAnswer == null) { // Tek seçim hakkı
-                        selectedAnswer = option.substring(0, 1)
-                        val isCorrect = selectedAnswer == correctAnswer
-                        resultMessage = if (isCorrect) {
-                            "Doğru cevap!"
-                        } else {
-                            "Yanlış cevap. Doğru cevap: $correctAnswer)"
-                        }
-                        onAnswerSelected(isCorrect) // Sonucu dışarıya ilet
+                        selectedAnswer = optionKey
+                        isCorrect = selectedAnswer == correctAnswer
+                        onAnswerSelected(isCorrect == true) // Sonucu üst seviyeye ilet
                     }
                     .padding(vertical = 8.dp)
-            )
-        }
-
-        // Sonuç mesajı
-        if (resultMessage.isNotEmpty()) {
-            Text(
-                text = resultMessage,
-                style = MaterialTheme.typography.bodyMedium,
-                color = if (resultMessage == "Doğru cevap!") Color.Green else Color.Red,
-                modifier = Modifier.padding(top = 16.dp)
+                    .padding(horizontal = 8.dp) // İçerik dolgusu
             )
         }
     }

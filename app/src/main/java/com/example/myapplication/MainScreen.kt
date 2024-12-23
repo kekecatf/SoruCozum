@@ -1,6 +1,7 @@
 package com.example.myapplication.AnaSayfaDenemeler
 
 import android.annotation.SuppressLint
+import android.graphics.Color.rgb
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -125,7 +126,7 @@ fun QuickTestOptions(navController: NavController) {
         TestButton(navController,"Türkçe Testi", Icons.Default.Create, Color(0xFF81C784))
         TestButton(navController,"Matematik Testi", Icons.Default.Create, Color(0xFF64B5F6))
         TestButton(navController,"Tarih Testi", Icons.Default.Create, Color(0xFFFFB74D))
-        TestButton(navController,"Mevzuat Testi",Icons.Default.Create,Color(0xFF81C784))
+        TestButton(navController,"Mevzuat Testi",Icons.Default.Create,Color(rgb(77, 161, 169)))
     }
 }
 

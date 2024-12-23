@@ -5,5 +5,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun istatistik(){
-    Text("istatistik")
+    Text("istatistik sayfası")
 }
