@@ -1,9 +1,10 @@
-package com.example.myapplication
+package com.example.myapplication.testSayfalar
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
+
 @Composable
-fun ayarlar(){
-    Text("Ayarlar sayfası")
+fun turkceTesti(){
+    Text("türkçe sayfası")
 }

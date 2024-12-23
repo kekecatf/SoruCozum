@@ -36,7 +36,7 @@ fun MainScreenWithStats(navController: NavController) {
                 QuickTestOptions(navController)
             }
         },
-        bottomBar = { BottomNavigationBar4() }
+        bottomBar = { BottomNavigationBar4(navController) }
     )
 }
 
@@ -122,16 +122,30 @@ fun QuickTestOptions(navController: NavController) {
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
         )
-        TestButton2(navController,"Türkçe Testi", Icons.Default.Create, Color(0xFF81C784))
-        TestButton2(navController,"Matematik Testi", Icons.Default.Create, Color(0xFF64B5F6))
-        TestButton2(navController,"Tarih Testi", Icons.Default.Create, Color(0xFFFFB74D))
+        TestButton(navController,"Türkçe Testi", Icons.Default.Create, Color(0xFF81C784))
+        TestButton(navController,"Matematik Testi", Icons.Default.Create, Color(0xFF64B5F6))
+        TestButton(navController,"Tarih Testi", Icons.Default.Create, Color(0xFFFFB74D))
+        TestButton(navController,"Mevzuat Testi",Icons.Default.Create,Color(0xFF81C784))
     }
 }
 
 @Composable
-fun TestButton2(navController: NavController,title: String, icon: ImageVector, color: Color) {
+fun TestButton(navController: NavController, title: String, icon: ImageVector, color: Color) {
     Button(
-        onClick = { navController.navigate("Ayarlar")},
+        onClick = {
+            if (title== "Türkçe Testi") {
+                navController.navigate("turkceTesti")
+            }
+            else if(title=="Matematik Testi"){
+                navController.navigate("matematikTesti")
+            }
+            else if(title=="Tarih Testi"){
+                navController.navigate("tarihTesti")
+            }
+            else if(title=="Mevzuat Testi"){
+                navController.navigate("mevzuatTesti")
+            }
+        },
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp),
@@ -147,25 +161,25 @@ fun TestButton2(navController: NavController,title: String, icon: ImageVector, c
 }
 
 @Composable
-fun BottomNavigationBar4() {
+fun BottomNavigationBar4(navController: NavController) {
     NavigationBar {
         NavigationBarItem(
             icon = { Icon(Icons.Default.Home, contentDescription = "Ana Sayfa") },
             label = { Text("Ana Sayfa") },
             selected = true,
-            onClick = { /* Ana Sayfa */ }
+            onClick = { navController.navigate("anaSayfa") }
         )
         NavigationBarItem(
             icon = { Icon(Icons.Default.Info, contentDescription = "İstatistik") },
             label = { Text("İstatistik") },
             selected = false,
-            onClick = { /* İstatistik */ }
+            onClick = { navController.navigate("istatistik") }
         )
         NavigationBarItem(
             icon = { Icon(Icons.Default.Settings, contentDescription = "Ayarlar") },
             label = { Text("Ayarlar") },
             selected = false,
-            onClick = { /* Ayarlar */ }
+            onClick = { navController.navigate("ayarlar") }
         )
     }
 }

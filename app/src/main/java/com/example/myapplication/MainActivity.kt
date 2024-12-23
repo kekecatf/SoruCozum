@@ -12,6 +12,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.AnaSayfaDenemeler.MainScreenWithStats
+import com.example.myapplication.bottomNavBarSayfalar.ayarlar
+import com.example.myapplication.bottomNavBarSayfalar.istatistik
+import com.example.myapplication.testSayfalar.matematikTesti
+import com.example.myapplication.testSayfalar.mevzuatTesti
+import com.example.myapplication.testSayfalar.tarihTesti
+import com.example.myapplication.testSayfalar.turkceTesti
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -29,13 +35,31 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SayfaGecisleri() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "AnaSayfa") {
-        composable("AnaSayfa") {
+    NavHost(navController = navController, startDestination = "anaSayfa") {
+        composable("anaSayfa") {
             MainScreenWithStats(navController = navController)
         }
-        composable("Ayarlar"){
+        composable("istatistik"){
+            istatistik()
+        }
+        composable("ayarlar"){
             ayarlar()
         }
+
+        composable("turkceTesti"){
+            turkceTesti()
+        }
+        composable("matematikTesti"){
+            matematikTesti()
+        }
+        composable("tarihTesti"){
+            tarihTesti()
+        }
+        composable("mevzuatTesti"){
+            mevzuatTesti()
+        }
+
+
     }
 }
 
