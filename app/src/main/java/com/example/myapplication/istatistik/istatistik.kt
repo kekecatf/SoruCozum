@@ -1,4 +1,4 @@
-package com.example.myapplication.bottomNavBarSayfalar
+package com.example.myapplication.istatistik
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

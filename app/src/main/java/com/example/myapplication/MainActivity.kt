@@ -13,7 +13,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.AnaSayfaDenemeler.MainScreenWithStats
 import com.example.myapplication.bottomNavBarSayfalar.ayarlar
-import com.example.myapplication.bottomNavBarSayfalar.istatistik
+import com.example.myapplication.istatistik.QuizViewModel
+import com.example.myapplication.istatistik.istatistik
 import com.example.myapplication.testSayfalar.matematikTesti
 import com.example.myapplication.testSayfalar.mevzuatTesti
 import com.example.myapplication.testSayfalar.tarihTesti
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             //com.example.myapplication.AnaSayfaDenemeler.MainScreen()
-            SayfaGecisleri()
+            SayfaGecisleri(viewModel = QuizViewModel())
         }
     }
 }
@@ -33,11 +34,11 @@ class MainActivity : ComponentActivity() {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun SayfaGecisleri() {
+fun SayfaGecisleri(viewModel: QuizViewModel) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "anaSayfa") {
         composable("anaSayfa") {
-            MainScreenWithStats(navController = navController)
+            MainScreenWithStats(navController = navController,quizResult = viewModel.quizResult)
         }
         composable("istatistik"){
             istatistik()
@@ -56,9 +57,10 @@ fun SayfaGecisleri() {
             tarihTesti()
         }
         composable("mevzuatTesti"){
-            mevzuatTesti()
+            mevzuatTesti(
+                viewModel = viewModel, // ViewModel doğrudan Page2Screen'e gönderilir
+                onNavigateBack = { navController.popBackStack() })// Geri butonu için callback
         }
-
 
     }
 }
@@ -67,5 +69,5 @@ fun SayfaGecisleri() {
 @Preview
 @Composable
 fun preview2(){
-    SayfaGecisleri()
+    SayfaGecisleri(viewModel = QuizViewModel())
 }

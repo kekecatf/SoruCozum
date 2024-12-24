@@ -18,13 +18,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.myapplication.istatistik.QuizResult
+import com.example.myapplication.istatistik.QuizViewModel
 import com.example.myapplication.SayfaGecisleri
 
 
 @Composable
-fun MainScreenWithStats(navController: NavController) {
+fun MainScreenWithStats(navController: NavController,quizResult: QuizResult) {
     Scaffold(
-        topBar = { AppTopBarWithWelcome("Ahmet") },
+        topBar = {
+            AppTopBarWithWelcome("Ede")
+                 },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
@@ -32,7 +36,7 @@ fun MainScreenWithStats(navController: NavController) {
                     .fillMaxSize()
                     .padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
-                UserStatsSection()
+                UserStatsSection(navController,quizResult)
                 Spacer(modifier = Modifier.height(16.dp))
                 QuickTestOptions(navController)
             }
@@ -65,8 +69,11 @@ fun AppTopBarWithWelcome(userName: String) {
 }
 
 @Composable
-fun UserStatsSection() {
+fun UserStatsSection(navController: NavController,quizResult: QuizResult) {
     Card(
+        onClick = {
+            navController.navigate("istatistik")
+        },
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
@@ -92,9 +99,9 @@ fun UserStatsSection() {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                StatBox("Çözülen Sorular", "25")
-                StatBox("Doğru Cevaplar", "22")
-                StatBox("Yanlış Cevaplar", "3")
+                StatBox("Çözülen Sorular", "${quizResult.totalQuest}")
+                StatBox("Doğru Cevaplar", "${quizResult.correct}")
+                StatBox("Yanlış Cevaplar", "${quizResult.incorrect}")
             }
         }
     }
@@ -189,5 +196,5 @@ fun BottomNavigationBar4(navController: NavController) {
 @Preview
 @Composable
 fun preview2(){
-    SayfaGecisleri()
+    SayfaGecisleri(viewModel = QuizViewModel())
 }

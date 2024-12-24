@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.sorular
 
 data class Question(
     val id: Int,
