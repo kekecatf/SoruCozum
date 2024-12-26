@@ -40,8 +40,11 @@ fun SayfaGecisleri(viewModel: QuizViewModel) {
         composable("anaSayfa") {
             MainScreenWithStats(navController = navController,quizResult = viewModel.quizResult)
         }
-        composable("istatistik"){
-            istatistik()
+        composable("istatistik") {
+            istatistik(
+                viewModel = viewModel,
+                onNavigateBack = { navController.popBackStack() }
+            )
         }
         composable("ayarlar"){
             ayarlar()
