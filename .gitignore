@@ -10,6 +10,11 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Lokal Konfigurasyon Dosyalari
+local.properties
+.gradle/
+*/.gradle/
+
 # Package Files #
 *.jar
 *.war
