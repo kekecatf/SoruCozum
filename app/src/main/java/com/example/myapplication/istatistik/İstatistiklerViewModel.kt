@@ -19,4 +19,7 @@ class QuizViewModel : ViewModel() {
     fun updateTotalQuest(){
         quizResult = quizResult.copy(totalQuest = quizResult.totalQuest + 1)
     }
+    fun resetStats() {
+        quizResult = QuizResult(0, 0, 0)
+    }
 }

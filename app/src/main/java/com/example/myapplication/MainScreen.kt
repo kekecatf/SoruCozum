@@ -12,8 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -21,13 +23,16 @@ import androidx.navigation.NavController
 import com.example.myapplication.istatistik.QuizResult
 import com.example.myapplication.istatistik.QuizViewModel
 import com.example.myapplication.SayfaGecisleri
+import com.mikepenz.iconics.compose.IconicsPainter
+import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic
+
 
 
 @Composable
 fun MainScreenWithStats(navController: NavController,quizResult: QuizResult) {
     Scaffold(
         topBar = {
-            AppTopBarWithWelcome("Ede")
+            AppTopBarWithWelcome("Atıf")
                  },
         content = { paddingValues ->
             Column(
@@ -176,6 +181,26 @@ fun BottomNavigationBar4(navController: NavController) {
             label = { Text("Ana Sayfa") },
             selected = true,
             onClick = { navController.navigate("anaSayfa") }
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Default.Close, contentDescription = "Yanlış Yapılan Sorular") },
+            label = { Text(
+                text = "Yanlış Yapılan Sorular",
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis // Metin sığmazsa '...' koyar
+            ) },
+            selected = false,
+            onClick = { navController.navigate("Yanlış Yapılan Sorular") }
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Default.List, contentDescription = "Rastgele Sorular") },
+            label = { Text(
+                text = "Yanlış Yapılan Sorular",
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis // Metin sığmazsa '...' koyar
+            ) },
+            selected = false,
+            onClick = { navController.navigate("Rastgele Sorular") }
         )
         NavigationBarItem(
             icon = { Icon(Icons.Default.Info, contentDescription = "İstatistik") },

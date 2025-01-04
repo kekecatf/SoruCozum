@@ -89,4 +89,9 @@ dependencies {
     implementation ("androidx.compose.foundation:foundation:1.5.0") // Foundation
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0")
     implementation ("androidx.activity:activity-compose:1.7.2")
+
+    implementation ("com.mikepenz:iconics-core:5.3.1")
+    implementation ("com.mikepenz:iconics-views:5.3.1")
+    implementation ("com.mikepenz:iconics-compose:5.3.1")
+    implementation ("com.mikepenz:material-design-iconic-typeface:2.2.0.5@aar")
 }

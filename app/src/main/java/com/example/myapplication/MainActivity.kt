@@ -43,7 +43,8 @@ fun SayfaGecisleri(viewModel: QuizViewModel) {
         composable("istatistik") {
             istatistik(
                 viewModel = viewModel,
-                onNavigateBack = { navController.popBackStack() }
+                onNavigateBack = { navController.popBackStack() },
+                onDeleteStats = { viewModel.resetStats() }
             )
         }
         composable("ayarlar"){
