@@ -13,8 +13,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.AnaSayfaDenemeler.MainScreenWithStats
 import com.example.myapplication.bottomNavBarSayfalar.ayarlar
-import com.example.myapplication.istatistik.QuizViewModel
-import com.example.myapplication.istatistik.istatistik
+import com.example.myapplication.bottomNavBarSayfalar.istatistik.QuizViewModel
+import com.example.myapplication.bottomNavBarSayfalar.istatistik.istatistik
+import com.example.myapplication.bottomNavBarSayfalar.rastgeleSorular
+import com.example.myapplication.bottomNavBarSayfalar.yanlisYapilanSorular
 import com.example.myapplication.testSayfalar.matematikTesti
 import com.example.myapplication.testSayfalar.mevzuatTesti
 import com.example.myapplication.testSayfalar.tarihTesti
@@ -40,6 +42,12 @@ fun SayfaGecisleri(viewModel: QuizViewModel) {
         composable("anaSayfa") {
             MainScreenWithStats(navController = navController,quizResult = viewModel.quizResult)
         }
+        composable("yanlisYapilanSorular") {
+            yanlisYapilanSorular(navController=navController)
+        }
+        composable("rastgeleSorular") {
+            rastgeleSorular(navController=navController)
+        }
         composable("istatistik") {
             istatistik(
                 viewModel = viewModel,
@@ -48,7 +56,7 @@ fun SayfaGecisleri(viewModel: QuizViewModel) {
             )
         }
         composable("ayarlar"){
-            ayarlar()
+            ayarlar(navController=navController)
         }
 
         composable("turkceTesti"){

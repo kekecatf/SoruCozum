@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -20,11 +19,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.myapplication.istatistik.QuizResult
-import com.example.myapplication.istatistik.QuizViewModel
+import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.myapplication.bottomNavBarSayfalar.istatistik.QuizResult
+import com.example.myapplication.bottomNavBarSayfalar.istatistik.QuizViewModel
 import com.example.myapplication.SayfaGecisleri
-import com.mikepenz.iconics.compose.IconicsPainter
-import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic
 
 
 
@@ -46,7 +44,7 @@ fun MainScreenWithStats(navController: NavController,quizResult: QuizResult) {
                 QuickTestOptions(navController)
             }
         },
-        bottomBar = { BottomNavigationBar4(navController) }
+        bottomBar = { BottomNavigationBar(navController) }
     )
 }
 
@@ -174,48 +172,76 @@ fun TestButton(navController: NavController, title: String, icon: ImageVector, c
 }
 
 @Composable
-fun BottomNavigationBar4(navController: NavController) {
+fun BottomNavigationBar(navController: NavController) {
+    // Mevcut rotayı almak için
+    val currentDestination = navController.currentBackStackEntryAsState().value?.destination?.route
+
     NavigationBar {
         NavigationBarItem(
             icon = { Icon(Icons.Default.Home, contentDescription = "Ana Sayfa") },
             label = { Text("Ana Sayfa") },
-            selected = true,
-            onClick = { navController.navigate("anaSayfa") }
+            selected = currentDestination == "anaSayfa",
+            onClick = {
+                if (currentDestination != "anaSayfa") {
+                    navController.navigate("anaSayfa")
+                }
+            }
         )
         NavigationBarItem(
             icon = { Icon(Icons.Default.Close, contentDescription = "Yanlış Yapılan Sorular") },
-            label = { Text(
-                text = "Yanlış Yapılan Sorular",
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis // Metin sığmazsa '...' koyar
-            ) },
-            selected = false,
-            onClick = { navController.navigate("Yanlış Yapılan Sorular") }
+            label = {
+                Text(
+                    text = "Yanlış Yapılan Sorular",
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis // Metin sığmazsa '...' koyar
+                )
+            },
+            selected = currentDestination == "yanlisYapilanSorular",
+            onClick = {
+                if (currentDestination != "yanlisYapilanSorular") {
+                    navController.navigate("yanlisYapilanSorular")
+                }
+            }
         )
         NavigationBarItem(
             icon = { Icon(Icons.Default.List, contentDescription = "Rastgele Sorular") },
-            label = { Text(
-                text = "Yanlış Yapılan Sorular",
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis // Metin sığmazsa '...' koyar
-            ) },
-            selected = false,
-            onClick = { navController.navigate("Rastgele Sorular") }
+            label = {
+                Text(
+                    text = "Rastgele Sorular",
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis // Metin sığmazsa '...' koyar
+                )
+            },
+            selected = currentDestination == "rastgeleSorular",
+            onClick = {
+                if (currentDestination != "rastgeleSorular") {
+                    navController.navigate("rastgeleSorular")
+                }
+            }
         )
         NavigationBarItem(
             icon = { Icon(Icons.Default.Info, contentDescription = "İstatistik") },
             label = { Text("İstatistik") },
-            selected = false,
-            onClick = { navController.navigate("istatistik") }
+            selected = currentDestination == "istatistik",
+            onClick = {
+                if (currentDestination != "istatistik") {
+                    navController.navigate("istatistik")
+                }
+            }
         )
         NavigationBarItem(
             icon = { Icon(Icons.Default.Settings, contentDescription = "Ayarlar") },
             label = { Text("Ayarlar") },
-            selected = false,
-            onClick = { navController.navigate("ayarlar") }
+            selected = currentDestination == "ayarlar",
+            onClick = {
+                if (currentDestination != "ayarlar") {
+                    navController.navigate("ayarlar")
+                }
+            }
         )
     }
 }
+
 
 @SuppressLint("NewApi")
 @Preview

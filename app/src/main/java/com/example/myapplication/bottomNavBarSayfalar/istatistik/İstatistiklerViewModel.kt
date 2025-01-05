@@ -1,4 +1,4 @@
-package com.example.myapplication.istatistik
+package com.example.myapplication.bottomNavBarSayfalar.istatistik
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

@@ -1,4 +1,4 @@
-package com.example.myapplication.istatistik
+package com.example.myapplication.bottomNavBarSayfalar.istatistik
 
 data class QuizResult(
     var correct: Int = 0,
