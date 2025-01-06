@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.myapplication.AnaSayfaDenemeler.AppTopBarWithWelcome
-import com.example.myapplication.AnaSayfaDenemeler.BottomNavigationBar
 import com.example.myapplication.AnaSayfaDenemeler.QuickTestOptions
 import com.example.myapplication.AnaSayfaDenemeler.UserStatsSection
+import com.example.myapplication.BottomNavigationBar
 
 @Composable
 fun rastgeleSorular(navController: NavController){

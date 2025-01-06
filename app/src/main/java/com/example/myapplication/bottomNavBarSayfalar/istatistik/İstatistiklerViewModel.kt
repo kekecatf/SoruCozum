@@ -4,22 +4,23 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.testSayfalar.DogruYanlisBilgisi
 
-class QuizViewModel : ViewModel() {
-    var quizResult by mutableStateOf(QuizResult())
+class istatistikViewModel : ViewModel() {
+    var dogruYanlisBilgisi by mutableStateOf(DogruYanlisBilgisi())
         private set
 
     fun updateCorrectAnswers() {
-        quizResult = quizResult.copy(correct = quizResult.correct + 1)
+        dogruYanlisBilgisi = dogruYanlisBilgisi.copy(correct = dogruYanlisBilgisi.correct + 1)
     }
 
     fun updateIncorrectAnswers() {
-        quizResult = quizResult.copy(incorrect = quizResult.incorrect + 1)
+        dogruYanlisBilgisi = dogruYanlisBilgisi.copy(incorrect = dogruYanlisBilgisi.incorrect + 1)
     }
     fun updateTotalQuest(){
-        quizResult = quizResult.copy(totalQuest = quizResult.totalQuest + 1)
+        dogruYanlisBilgisi = dogruYanlisBilgisi.copy(totalQuest = dogruYanlisBilgisi.totalQuest + 1)
     }
     fun resetStats() {
-        quizResult = QuizResult(0, 0, 0)
+        dogruYanlisBilgisi = DogruYanlisBilgisi(0, 0, 0)
     }
 }

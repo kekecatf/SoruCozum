@@ -14,20 +14,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.myapplication.bottomNavBarSayfalar.istatistik.QuizResult
-import com.example.myapplication.bottomNavBarSayfalar.istatistik.QuizViewModel
+import com.example.myapplication.BottomNavigationBar
+import com.example.myapplication.testSayfalar.DogruYanlisBilgisi
+import com.example.myapplication.bottomNavBarSayfalar.istatistik.istatistikViewModel
 import com.example.myapplication.SayfaGecisleri
-
+import com.example.myapplication.testSayfalar.SoruViewModel
 
 
 @Composable
-fun MainScreenWithStats(navController: NavController,quizResult: QuizResult) {
+fun MainScreenWithStats(navController: NavController, dogruYanlisBilgisi: DogruYanlisBilgisi) {
     Scaffold(
         topBar = {
             AppTopBarWithWelcome("Atıf")
@@ -39,7 +38,7 @@ fun MainScreenWithStats(navController: NavController,quizResult: QuizResult) {
                     .fillMaxSize()
                     .padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
-                UserStatsSection(navController,quizResult)
+                UserStatsSection(navController,dogruYanlisBilgisi)
                 Spacer(modifier = Modifier.height(16.dp))
                 QuickTestOptions(navController)
             }
@@ -72,7 +71,7 @@ fun AppTopBarWithWelcome(userName: String) {
 }
 
 @Composable
-fun UserStatsSection(navController: NavController,quizResult: QuizResult) {
+fun UserStatsSection(navController: NavController, dogruYanlisBilgisi: DogruYanlisBilgisi) {
     Card(
         onClick = {
             navController.navigate("istatistik")
@@ -102,9 +101,9 @@ fun UserStatsSection(navController: NavController,quizResult: QuizResult) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                StatBox("Çözülen Sorular", "${quizResult.totalQuest}")
-                StatBox("Doğru Cevaplar", "${quizResult.correct}")
-                StatBox("Yanlış Cevaplar", "${quizResult.incorrect}")
+                StatBox("Çözülen Sorular", "${dogruYanlisBilgisi.totalQuest}")
+                StatBox("Doğru Cevaplar", "${dogruYanlisBilgisi.correct}")
+                StatBox("Yanlış Cevaplar", "${dogruYanlisBilgisi.incorrect}")
             }
         }
     }
@@ -171,81 +170,13 @@ fun TestButton(navController: NavController, title: String, icon: ImageVector, c
     }
 }
 
-@Composable
-fun BottomNavigationBar(navController: NavController) {
-    // Mevcut rotayı almak için
-    val currentDestination = navController.currentBackStackEntryAsState().value?.destination?.route
 
-    NavigationBar {
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.Home, contentDescription = "Ana Sayfa") },
-            label = { Text("Ana Sayfa") },
-            selected = currentDestination == "anaSayfa",
-            onClick = {
-                if (currentDestination != "anaSayfa") {
-                    navController.navigate("anaSayfa")
-                }
-            }
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.Close, contentDescription = "Yanlış Yapılan Sorular") },
-            label = {
-                Text(
-                    text = "Yanlış Yapılan Sorular",
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis // Metin sığmazsa '...' koyar
-                )
-            },
-            selected = currentDestination == "yanlisYapilanSorular",
-            onClick = {
-                if (currentDestination != "yanlisYapilanSorular") {
-                    navController.navigate("yanlisYapilanSorular")
-                }
-            }
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.List, contentDescription = "Rastgele Sorular") },
-            label = {
-                Text(
-                    text = "Rastgele Sorular",
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis // Metin sığmazsa '...' koyar
-                )
-            },
-            selected = currentDestination == "rastgeleSorular",
-            onClick = {
-                if (currentDestination != "rastgeleSorular") {
-                    navController.navigate("rastgeleSorular")
-                }
-            }
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.Info, contentDescription = "İstatistik") },
-            label = { Text("İstatistik") },
-            selected = currentDestination == "istatistik",
-            onClick = {
-                if (currentDestination != "istatistik") {
-                    navController.navigate("istatistik")
-                }
-            }
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.Settings, contentDescription = "Ayarlar") },
-            label = { Text("Ayarlar") },
-            selected = currentDestination == "ayarlar",
-            onClick = {
-                if (currentDestination != "ayarlar") {
-                    navController.navigate("ayarlar")
-                }
-            }
-        )
-    }
-}
+
 
 
 @SuppressLint("NewApi")
 @Preview
 @Composable
 fun preview2(){
-    SayfaGecisleri(viewModel = QuizViewModel())
+    SayfaGecisleri(viewModel = SoruViewModel())
 }

@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.myapplication.AnaSayfaDenemeler.BottomNavigationBar
+import com.example.myapplication.BottomNavigationBar
 
 @Composable
 fun ayarlar(navController:NavController){

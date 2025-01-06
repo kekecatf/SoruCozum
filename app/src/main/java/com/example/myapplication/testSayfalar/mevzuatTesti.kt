@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,11 +21,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.bottomNavBarSayfalar.istatistik.QuizViewModel
+import com.example.myapplication.bottomNavBarSayfalar.istatistik.istatistikViewModel
 
 @Composable
 fun mevzuatTesti(
-    viewModel: QuizViewModel, // ViewModel'den veri alınır ve güncellenir
+    viewModel: SoruViewModel, // ViewModel'den veri alınır ve güncellenir
     onNavigateBack: () -> Unit // Geri dönmek için callback
 ) {
     Column(
@@ -34,44 +33,28 @@ fun mevzuatTesti(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Soru 1
-        QuestionComponent(
-            questionText = "Kınama ve Ödeme kesintisi gerektiren fiil ve davranışlar kaç gün içerisinde disiplin cezası verilmediği takdirde zaman aşımına uğrar?",
-            options = listOf("a) 3 ay", "b) 6 ay", "c) 9 ay", "d) 12 ay"),
-            correctAnswer = "b"
-        ) { isCorrect ->
-            if (isCorrect) {
-                viewModel.updateCorrectAnswers() // Doğru cevap artırılır
-                viewModel.updateTotalQuest()
-            } else {
-                viewModel.updateIncorrectAnswers() // Yanlış cevap artırılır
-                viewModel.updateTotalQuest()
+        // Soruları dinamik olarak oluşturuyoruz
+        viewModel.sorular.forEach { soru ->
+            QuestionComponent(
+                questionText = soru.soruMetni,
+                options = soru.secenekler,
+                correctAnswer = soru.dogruCevap
+            ) { isCorrect ->
+                if (isCorrect) {
+                    viewModel.updateCorrectAnswers() // Doğru cevap artırılır
+                } else {
+                    viewModel.updateIncorrectAnswers(soru) // Yanlış cevap artırılır ve soruyu kaydet
+                }
+                viewModel.updateTotalQuest() // Toplam soru sayısını artır
             }
+
+            Spacer(modifier = Modifier.height(24.dp))
         }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Soru 2
-        QuestionComponent(
-            questionText = "Disiplin cezalarının yazılı tebliğ süresi kaç gündür?",
-            options = listOf("a) 5 gün", "b) 7 gün", "c) 10 gün", "d) 15 gün"),
-            correctAnswer = "c"
-        ) { isCorrect ->
-            if (isCorrect) {
-                viewModel.updateCorrectAnswers() // Doğru cevap artırılır
-                viewModel.updateTotalQuest()
-            } else {
-                viewModel.updateIncorrectAnswers() // Yanlış cevap artırılır
-                viewModel.updateTotalQuest()
-            }
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
 
         // Sonuçları göster
         Text(
-            text = "Doğru: ${viewModel.quizResult.correct}, Yanlış: ${viewModel.quizResult.incorrect}, Toplam: ${
-                viewModel.quizResult.correct + viewModel.quizResult.incorrect
+            text = "Doğru: ${viewModel.dogruYanlisBilgisi.correct}, Yanlış: ${viewModel.dogruYanlisBilgisi.incorrect}, Toplam: ${
+                viewModel.dogruYanlisBilgisi.correct + viewModel.dogruYanlisBilgisi.incorrect
             }",
             style = MaterialTheme.typography.bodyLarge,
             color = Color.Black,
@@ -81,7 +64,7 @@ fun mevzuatTesti(
         Spacer(modifier = Modifier.height(24.dp))
 
         // Geri dönme butonu
-        Button (onClick = onNavigateBack) {
+        Button(onClick = onNavigateBack) {
             Text(text = "Geri Dön")
         }
     }
@@ -140,6 +123,7 @@ fun QuestionComponent(
         }
     }
 }
+
 
 
 

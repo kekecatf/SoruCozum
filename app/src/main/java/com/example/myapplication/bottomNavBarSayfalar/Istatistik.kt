@@ -1,24 +1,16 @@
-package com.example.myapplication.bottomNavBarSayfalar.istatistik
+package com.example.myapplication.bottomNavBarSayfalar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,21 +22,20 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import java.lang.reflect.Modifier
+import com.example.myapplication.testSayfalar.SoruViewModel
+
 //androidx.compose.ui.Modifier
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun istatistik(
-    viewModel: QuizViewModel,
+fun Istatistik(
+    viewModel: SoruViewModel,
     onNavigateBack: () -> Unit,
     onDeleteStats: () -> Unit
 ) {
-    val quizResult = viewModel.quizResult
+    // Güncel istatistik bilgilerini DogruYanlisBilgisi'nden alıyoruz
+    val dogruYanlisBilgisi = viewModel.dogruYanlisBilgisi
 
     Scaffold(
         topBar = {
@@ -76,9 +67,10 @@ fun istatistik(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            StatisticCard(title = "Toplam çözülen soru", value = quizResult.totalQuest)
-            StatisticCard(title = "Doğru çözülen soru", value = quizResult.correct)
-            StatisticCard(title = "Yanlış çözülen soru", value = quizResult.incorrect)
+            // Bilgiler DogruYanlisBilgisi sınıfından alınarak gösteriliyor
+            StatisticCard(title = "Toplam çözülen soru", value = dogruYanlisBilgisi.totalQuest)
+            StatisticCard(title = "Doğru çözülen soru", value = dogruYanlisBilgisi.correct)
+            StatisticCard(title = "Yanlış çözülen soru", value = dogruYanlisBilgisi.incorrect)
         }
     }
 }
@@ -112,4 +104,3 @@ fun StatisticCard(title: String, value: Int) {
         }
     }
 }
-
