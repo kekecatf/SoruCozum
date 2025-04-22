@@ -1,23 +1,21 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "com.example.myapplication"
-    compileSdk = 34
+    namespace = "com.example.sinavavhazirliguygulama"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.myapplication"
+        applicationId = "com.example.sinavavhazirliguygulama"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
@@ -30,22 +28,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
     }
 }
 
@@ -67,31 +57,46 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    //Arayüz İçin
-    implementation("androidx.compose.ui:ui-text-android:1.6.7")
-    implementation("androidx.compose.foundation:foundation-android:1.6.7")
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    // Material Icons (Dolu ve Outline versiyonları)
+    implementation ("androidx.compose.material:material-icons-core")
+    implementation ("androidx.compose.material:material-icons-extended")
 
-    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.x.x")
+    // Navigasyon bileşeni
+    implementation ("androidx.navigation:navigation-compose:2.7.5")
 
-    //Navigation
-    implementation("androidx.navigation:navigation-compose:2.7.7")
+    // Splash Screen API
+    implementation ("androidx.core:core-splashscreen:1.0.1")
 
-    //Sayfalar arası veri transferi(Nesne Tabanlı)
-    implementation("com.google.code.gson:gson:2.10.1")
+    // Görüntü yükleme kütüphanesi (isteğe bağlı)
+    implementation ("io.coil-kt:coil-compose:2.5.0")
 
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    // DataStore (Tercihler için)
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
 
-    implementation ("androidx.compose.ui:ui:1.5.0") // UI toolkit
-    implementation ("androidx.compose.material:material:1.5.0") // Material Design
-    implementation ("androidx.compose.ui:ui-tooling-preview:1.5.0") // Tooling preview
-    implementation ("androidx.compose.foundation:foundation:1.5.0") // Foundation
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0")
-    implementation ("androidx.activity:activity-compose:1.7.2")
+    // Room Database (Yerel veritabanı için)
+    implementation ("androidx.room:room-runtime:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
+    annotationProcessor ("androidx.room:room-compiler:2.6.1")
+    // Kodu derlemek için kapt kullanıyorsanız, bu satırı ekleyin:
+    // kapt 'androidx.room:room-compiler:2.6.1'
+    // Alternatif olarak ksp kullanıyorsanız, bu satırı ekleyin:
+    // ksp 'androidx.room:room-compiler:2.6.1'
 
-    implementation ("com.mikepenz:iconics-core:5.3.1")
-    implementation ("com.mikepenz:iconics-views:5.3.1")
-    implementation ("com.mikepenz:iconics-compose:5.3.1")
-    implementation ("com.mikepenz:material-design-iconic-typeface:2.2.0.5@aar")
+    // ViewModel composable entegrasyonu
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+
+    // Kotlin Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // Test bağımlılıkları
+    testImplementation ("junit:junit:4.13.2")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation ("androidx.compose.ui:ui-test-junit4")
+
+    // Debug bağımlılıkları
+    debugImplementation ("androidx.compose.ui:ui-tooling")
+    debugImplementation ("androidx.compose.ui:ui-test-manifest")
+
+    implementation ("com.google.code.gson:gson:2.10.1")
 }

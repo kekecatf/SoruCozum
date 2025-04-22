@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "soruMetni": "Aşağıdaki paragrafta anlatılmak istenen ana düşünce nedir?...",
+    "secenekler": ["A şıkkı", "B şıkkı", "C şıkkı", "D şıkkı", "E şıkkı"],
+    "dogruCevap": 2,
+    "aciklama": "Bu paragrafta ana düşünce..."
+  },
+  {
+    "id": 2,
+    "soruMetni": "Diğer bir paragraf sorusu...",
+    "secenekler": ["A şıkkı", "B şıkkı", "C şıkkı", "D şıkkı", "E şıkkı"],
+    "dogruCevap": 0,
+    "aciklama": "Açıklama metni..."
+  }
+]
